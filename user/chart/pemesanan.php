@@ -12,6 +12,37 @@ if (!isset($_SESSION['cart']) || (empty($_SESSION['cart']['makanan']))) {
     exit();
 }
 
+if (isset($_POST['submit'])) {
+    // Ambil data dari form
+    $username = $_POST['Username'];
+    $email = $_POST['email_login'];
+    $no_telp = $_POST['no_telp_pengguna'];
+    $jam_ambil = $_POST['jam_ambil'];
+    $catatan = $_POST['catatan'];
+    $alamat = $_POST['alamat_makanan'];
+
+    // Ambil data dari session struk
+    $data = $_SESSION['struk'];
+    $user_id = $_SESSION['Username']['id_login'] ?? null;
+    $id_chart = $data['id_chart'];
+    $total_kuantitas = $data['total_kuantitas'];
+    $subtotal = $data['subtotal'];
+
+    $stmt = $mysqli->prepare("INSERT INTO pemesanan (id_login, id_chart, Username, email_login, no_telp, jam_ambil, catatan, total_kuantitas_makanan, subtotal_makanan, alamat_makanan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("iissssssds", $user_id, $id_chart, $username, $email, $no_telp, $jam_ambil, $catatan, $total_kuantitas, $subtotal, $alamat);
+
+    if ($stmt->execute()) {
+        $id_pemesanan = $stmt->insert_id;
+        $stmt->close();
+
+        // ✅ Redirect langsung ke struk.php
+        header("Location: struk.php?id=$id_pemesanan");
+        exit;
+    } else {
+        echo "Gagal menyimpan pemesanan: " . $stmt->error;
+    }
+}
+
 $user = $_SESSION['Username'];
 $total_makanan = 0;
 
@@ -35,8 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $user_id = $_SESSION['Username']['id_login'] ?? null;
-    $stmt = $mysqli->prepare("INSERT INTO pemesanan (id_login, Username, email_login, no_telp, jam_ambil, catatan, total_kuantitas_makanan, subtotal_makanan) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("isssssd", $user_id, $Username, $email, $no_telp, $jam_ambil, $catatan, $total_kuantitas_makanan, $subtotal_makanan);
+    $stmt = $mysqli->prepare("INSERT INTO pemesanan (id_login, id_chart, Username, email_login, no_telp, jam_ambil, catatan, total_kuantitas_makanan, subtotal_makanan) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("isssssd", $user_id, $id_chart, $Username, $email, $no_telp, $jam_ambil, $catatan, $total_kuantitas_makanan, $subtotal_makanan);
     $stmt->execute();
     $order_id = $stmt->insert_id;
     $stmt->close();
@@ -55,6 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="order-confirmation">
                 <h2>Terima kasih atas pesanan Anda!</h2>
                 <p>Pesanan Anda telah berhasil diproses.</p>
-                <a href="index1.php" class="back-to-home">Kembali ke Beranda</a>
+                <a href="/UKL_GBITE/user/landing/index.php" class="back-to-home">Kembali ke Beranda</a>
             </div>
         <?php else: ?>
             <form method="POST" action="checkout.php" class="checkout-form">
@@ -129,6 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <td><?php echo format_rupiah($total_makanan); ?></td>
                         </tr>
                     </table>
+            
                 </div>
 
                 <button type="submit" class="place-order-btn">Pesan Sekarang</button>
@@ -140,30 +173,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </html>
 
 <?php
-$_SESSION['struk'] = [
-    'nama' => $Username,
-    'no_telp' => $no_telp,
-    'subtotal' => $total_amount,
-    'jam_ambil' => $jam_ambil,
-    'alamat_makanan' => $Catatan
-];
+if (isset($_POST['submit'])) {
+    // Ambil data dari form
+    $username = $_POST['Username'];
+    $email = $_POST['email_login'];
+    $no_telp = $_POST['no_telp_pengguna'];
+    $jam_ambil = $_POST['jam_ambil'];
+    $catatan = $_POST['catatan'];
+    $alamat = $_POST['alamat_makanan'];
 
+    // Ambil data dari session struk
+    $data = $_SESSION['struk'];
+    $user_id = $_SESSION['Username']['id_login'] ?? null;
+    $id_chart = $data['id_chart'];
+    $total_kuantitas = $data['total_kuantitas'];
+    $subtotal = $data['subtotal'];
 
-header("Location: struk.php");
-exit();
+    $stmt = $mysqli->prepare("INSERT INTO pemesanan (id_login, id_chart, Username, email_login, no_telp, jam_ambil, catatan, total_kuantitas_makanan, subtotal_makanan, alamat_makanan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("iissssssds", $user_id, $id_chart, $username, $email, $no_telp, $jam_ambil, $catatan, $total_kuantitas, $subtotal, $alamat);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // ...proses penyimpanan database sudah dilakukan di atas...
+    if ($stmt->execute()) {
+        $id_pemesanan = $stmt->insert_id;
+        $stmt->close();
 
-    echo "<div style='max-width: 400px; margin: 30px auto; font-family: monospace; border: 1px dashed #000; padding: 20px; background-color: #fff;'>
-        <h2 style='text-align: center;'>STRUK PEMESANAN</h2>
-        <hr>
-        <p><strong>Nama Pemesan  :</strong> " . htmlspecialchars($Username) . "</p>
-        <p><strong>No. Telepon   :</strong> " . htmlspecialchars($no_telp) . "</p>
-        <p><strong>Subtotal      :</strong> Rp " . number_format($total_amount, 0, ',', '.') . "</p>
-        <p><strong>Jam Ambil     :</strong> " . htmlspecialchars($jam_ambil) . "</p>
-        <p><strong>Alamat Makanan:</strong><br>" . nl2br(htmlspecialchars($Catatan)) . "</p>
-        <hr>
-        <p style='text-align: center;'>Terima kasih telah memesan di G-BITE!</p>
-    </div>";
-}?>
+        // ✅ Redirect langsung ke struk.php
+        header("Location: struk.php?id=$id_pemesanan");
+        exit;
+    } else {
+        echo "Gagal menyimpan pemesanan: " . $stmt->error;
+    }
+}
+?>
+
