@@ -1,0 +1,111 @@
+/* Font dan Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f4fef4;
+    color: #2e3d27;
+}
+
+/* Header */
+header {
+    background-color: #2d6a4f;
+    padding: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h2 {
+    color: #fff;
+    font-family: "Signika", sans-serif;
+    font-size: 24px;
+}
+
+.logo span {
+    color: #b7e4c7;
+}
+
+.navigator a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navigator a:hover {
+    color: #95d5b2;
+}
+
+/* Profile Section */
+.profile {
+    width: 90%;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.heading {
+    text-align: center;
+    color: #40916c;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+/* Table Styling */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    border: 1px solid #d8f3dc;
+}
+
+.table th,
+.table td {
+    padding: 12px 20px;
+    border: 1px solid #d8f3dc;
+    text-align: left;
+}
+
+.table th {
+    background-color: #95d5b2;
+    color: #1b4332;
+}
+
+.table td {
+    background-color: #f1faee;
+}
+
+/* Buttons */
+.btn,
+.btn-edit {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-weight: 500;
+    color: #fff;
+    background-color: #2d6a4f;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover,
+.btn-edit:hover {
+    background-color: #1b4332;
+}

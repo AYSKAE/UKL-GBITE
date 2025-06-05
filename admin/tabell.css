@@ -1,0 +1,116 @@
+header{
+    position: flex;
+    top: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent;
+    padding: 30px 18%;
+    transition: ease .40s;
+    background-color: #BD424B;
+    margin: 0;
+    padding: 0;
+}
+
+.logo{
+    font-size: 30px;
+    font-weight: 550;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+.navbar{
+    display: flex;
+}
+
+.navbar a{
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 10px 22px;
+    border-radius: 4px;
+    transition: ease .40s;
+    text-decoration: none;
+}
+
+.navbar a:hover{
+    background: #fff;
+    color: #000000;
+    box-shadow: 5px 10px 30px rgb(85 85 85 / 20%);
+    border-radius: 4px;
+}
+
+/* Styling untuk heading */
+.heading {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 24px;
+}
+
+/* Styling untuk tombol */
+.btn, .btn-delete, .btn-edit {
+    display: inline-block;
+    padding: 8px 15px;
+    margin: 5px 0;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-delete {
+    background-color: #f44336;
+    color: white;
+}
+
+.btn-edit {
+    background-color: #008CBA;
+    color: white;
+}
+
+.btn:hover, .btn-delete:hover, .btn-edit:hover {
+    opacity: 0.8;
+}
+
+/* Styling untuk tabel */
+.table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 6px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #f2f2f2;
+    color: black;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table tr:hover {
+    background-color: #ddd;
+}
+
+/* Styling untuk gambar */
+.table img {
+    display: block;
+    margin: auto;
+    max-width: 100px;
+    height: auto;
+}
