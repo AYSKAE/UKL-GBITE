@@ -1,0 +1,317 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1F4529 0%, #47663B 100%);
+    min-height: 100vh;
+    color: #333;
+    line-height: 1.6;
+}
+
+
+.checkout-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #EED3B1;
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(31, 69, 41, 0.2);
+    border: 1px solid rgba(232, 236, 215, 0.3);
+}
+
+/* Header */
+.checkout-container h1 {
+    font-family: 'Judson', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, #1F4529, #47663B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+}
+
+.checkout-container h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(135deg, #1F4529, #47663B);
+    border-radius: 2px;
+}
+
+/* Form Styles */
+.checkout-form {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #1F4529;
+    font-size: 0.95rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    border: 2px solid rgba(71, 102, 59, 0.3);
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #E8ECD7;
+    backdrop-filter: blur(5px);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #47663B;
+    box-shadow: 0 0 0 3px rgba(71, 102, 59, 0.2);
+    transform: translateY(-2px);
+}
+
+.form-group input:hover {
+    border-color: rgba(71, 102, 59, 0.5);
+}
+
+
+.cart-summary {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(232, 236, 215, 0.6);
+    border-radius: 15px;
+    border: 1px solid rgba(71, 102, 59, 0.2);
+}
+
+.cart-summary h2 {
+    font-family: 'El Messiri', serif;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #1F4529;
+    text-align: center;
+}
+
+.cart-summary h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #47663B;
+    font-weight: 600;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    background: rgba(232, 236, 215, 0.8);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(31, 69, 41, 0.1);
+}
+
+thead th {
+    background: linear-gradient(135deg, #1F4529, #47663B);
+    color: #E8ECD7;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+tbody td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(71, 102, 59, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+tbody tr:hover {
+    background-color: rgba(71, 102, 59, 0.1);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.total-row {
+    background: rgba(71, 102, 59, 0.15) !important;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.total-row td {
+    padding: 1.2rem 1rem !important;
+    color: #1F4529;
+}
+
+/* Buttons */
+.place-order-btn,
+.back-to-home {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.place-order-btn {
+    background: linear-gradient(135deg, #1F4529, #47663B);
+    color: #E8ECD7;
+    width: 100%;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.place-order-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(31, 69, 41, 0.4);
+}
+
+.place-order-btn:active {
+    transform: translateY(-1px);
+}
+
+.back-to-home {
+    background: rgba(232, 236, 215, 0.8);
+    color: #1F4529;
+    border: 2px solid #47663B;
+    margin-top: 1rem;
+}
+
+.back-to-home:hover {
+    background: #47663B;
+    color: #E8ECD7;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(71, 102, 59, 0.3);
+}
+
+/* Order Confirmation */
+.order-confirmation {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: rgba(76, 175, 80, 0.1);
+    border-radius: 15px;
+    border: 2px solid rgba(76, 175, 80, 0.2);
+}
+
+.order-confirmation h2 {
+    color: #4caf50;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-family: 'El Messiri', serif;
+}
+
+.order-confirmation p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .checkout-container {
+        margin: 1rem;
+        padding: 1.5rem;
+        border-radius: 15px;
+    }
+    
+    .checkout-container h1 {
+        font-size: 2rem;
+    }
+    
+    table {
+        font-size: 0.9rem;
+    }
+    
+    thead th,
+    tbody td {
+        padding: 0.8rem 0.5rem;
+    }
+    
+    .place-order-btn,
+    .back-to-home {
+        padding: 0.9rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .checkout-container {
+        margin: 0.5rem;
+        padding: 1rem;
+    }
+    
+    .checkout-container h1 {
+        font-size: 1.8rem;
+    }
+    
+    table {
+        font-size: 0.8rem;
+    }
+    
+    thead th,
+    tbody td {
+        padding: 0.6rem 0.4rem;
+    }
+}
+
+/* Loading Animation */
+.place-order-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Smooth Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.checkout-container {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.form-group {
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: backwards;
+}
+
+.form-group:nth-child(1) { animation-delay: 0.1s; }
+.form-group:nth-child(2) { animation-delay: 0.2s; }
+.form-group:nth-child(3) { animation-delay: 0.3s; }
+.form-group:nth-child(4) { animation-delay: 0.4s; }
+
+.cart-summary {
+    animation: fadeInUp 0.6s ease-out 0.5s;
+    animation-fill-mode: backwards;
+}

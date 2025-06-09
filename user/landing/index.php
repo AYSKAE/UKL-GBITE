@@ -167,9 +167,9 @@ $query_mysql = mysqli_query($mysqli, "SELECT * FROM makanan") or die(mysqli_erro
       <h4>Information</h4>
       <p>Contact Us: <a href="https://wa.me/6285143898545">Ayska Eveline</a></p>
       <br>
-      <p>Email: <a href="https://mail.google.com/mail/u/0/?tf=cm&fs=1&to=aiskaku@gmail.com">biggesthug@gmail.com</a></p>
+      <p>Email: <a href="https://mail.google.com/mail/u/0/?tf=cm&fs=1&to=aiskaku@gmail.com">gbite@gmail.com</a></p>
       <br>
-      <p>Instagram: <a href="https://www.instagram.com/4ysell__111?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">@biggesthug</a></p>
+      <p>Instagram: <a href="https://www.instagram.com/4ysell__111?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">@g-bite</a></p>
       <br>
     </div>
   </s>

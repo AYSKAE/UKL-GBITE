@@ -12,37 +12,6 @@ if (!isset($_SESSION['cart']) || (empty($_SESSION['cart']['makanan']))) {
     exit();
 }
 
-if (isset($_POST['submit'])) {
-    // Ambil data dari form
-    $username = $_POST['Username'];
-    $email = $_POST['email_login'];
-    $no_telp = $_POST['no_telp_pengguna'];
-    $jam_ambil = $_POST['jam_ambil'];
-    $catatan = $_POST['catatan'];
-    $alamat = $_POST['alamat_makanan'];
-
-    // Ambil data dari session struk
-    $data = $_SESSION['struk'];
-    $user_id = $_SESSION['Username']['id_login'] ?? null;
-    $id_chart = $data['id_chart'];
-    $total_kuantitas = $data['total_kuantitas'];
-    $subtotal = $data['subtotal'];
-
-    $stmt = $mysqli->prepare("INSERT INTO pemesanan (id_login, id_chart, Username, email_login, no_telp, jam_ambil, catatan, total_kuantitas_makanan, subtotal_makanan, alamat_makanan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("iissssssds", $user_id, $id_chart, $username, $email, $no_telp, $jam_ambil, $catatan, $total_kuantitas, $subtotal, $alamat);
-
-    if ($stmt->execute()) {
-        $id_pemesanan = $stmt->insert_id;
-        $stmt->close();
-
-        // ✅ Redirect langsung ke struk.php
-        header("Location: struk.php?id=$id_pemesanan");
-        exit;
-    } else {
-        echo "Gagal menyimpan pemesanan: " . $stmt->error;
-    }
-}
-
 $user = $_SESSION['Username'];
 $total_makanan = 0;
 
@@ -52,40 +21,52 @@ function format_rupiah($angka) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $Username = htmlspecialchars($_POST['Username']);
-    $email = htmlspecialchars($_POST['email_login']);
+    $Username = htmlspecialchars($_POST['name']);
+    $email = htmlspecialchars($_POST['email']);
     $no_telp = htmlspecialchars($_POST['no_telp']);
     $jam_ambil = htmlspecialchars($_POST['jam_ambil']);
-    $Catatan = htmlspecialchars($_POST['catatan']);
+    $catatan = htmlspecialchars($_POST['catatan']);
 
-    $total_amount = 0;
+    $total_kuantitas_makanan = 0;
+    $sub_total_makanan = 0;
     if (!empty($_SESSION['cart']['makanan'])) {
         foreach ($_SESSION['cart']['makanan'] as $item) {
-            $total_amount += $item['Harga_makanan'] * $item['quantity'];
+            $total_kuantitas_makanan += $item['quantity'];
+            $sub_total_makanan += $item['Harga_makanan'] * $item['quantity'];
         }
     }
 
     $user_id = $_SESSION['Username']['id_login'] ?? null;
-    $stmt = $mysqli->prepare("INSERT INTO pemesanan (id_login, id_chart, Username, email_login, no_telp, jam_ambil, catatan, total_kuantitas_makanan, subtotal_makanan) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("isssssd", $user_id, $id_chart, $Username, $email, $no_telp, $jam_ambil, $catatan, $total_kuantitas_makanan, $subtotal_makanan);
-    $stmt->execute();
-    $order_id = $stmt->insert_id;
-    $stmt->close();
+    $id_chart = null; // Assuming id_chart is not used or can be null
 
-    $stmt_item = $mysqli->prepare("INSERT INTO makanan (id_makanan, Nama_makanan, Harga_makanan, deskripsi, Maps) VALUES (?, ?, ?, ?, ?)");
-    if (!empty($_SESSION['cart']['makanan'])) {
-        foreach ($_SESSION['cart']['makanan'] as $item) {
-            $makanan = 'makanan';
-            $id_makanan = $item['id_makanan'];
-            $nama_makanan = $item['nama_makanan'];
-            $quantity = $item['quantity'];
-            $harga_makanan = $item['harga_makanan'];
-            $subtotal = $harga_makanan * $quantity;
-            $stmt_item->bind_param("isisiid", $order_id, $makanan, $id_makanan, $nama_makanan, $quantity, $harga_makanan, $subtotal);
-            $stmt_item->execute();
+    $stmt = $mysqli->prepare("INSERT INTO pemesanan (id_login, id_chart, jam_ambil, catatan, total_kuantitas_makanan, sub_total_makanan) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("iissid", $user_id, $id_chart, $jam_ambil, $catatan, $total_kuantitas_makanan, $sub_total_makanan);
+
+    if ($stmt->execute()) {
+        $order_id = $stmt->insert_id;
+        $stmt->close();
+
+        // Insert each ordered item into makanan table with Maps field
+        $stmt_item = $mysqli->prepare("INSERT INTO makanan (id_pemesanan, Nama_makanan, Harga_makanan, quantity, Maps) VALUES (?, ?, ?, ?, ?)");
+        if (!empty($_SESSION['cart']['makanan'])) {
+            foreach ($_SESSION['cart']['makanan'] as $item) {
+                $nama_makanan = $item['Nama_makanan'];
+                $harga_makanan = $item['Harga_makanan'];
+                $quantity = $item['quantity'];
+                $maps = $item['Maps'] ?? ''; // Assuming Maps is stored in cart item
+                $stmt_item->bind_param("isdis", $order_id, $nama_makanan, $harga_makanan, $quantity, $maps);
+                $stmt_item->execute();
+            }
         }
+
+        // Redirect to struk.php with order id
+        header("Location: struk.php?id=$order_id");
+        exit();
+    } else {
+        echo "Gagal menyimpan pemesanan: " . $stmt->error;
     }
 }
+
 
 ?>
 
@@ -95,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Checkout - Gbite</title>
-    <link rel="stylesheet" href="/MY_NUSANTARA/css/about.css" />
+    <link rel="stylesheet" href="pemesanan.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Judson:wght@700&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;700&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ek+Mukta:wght@400&display=swap" />
@@ -112,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <a href="/UKL_GBITE/user/landing/index.php" class="back-to-home">Kembali ke Beranda</a>
             </div>
         <?php else: ?>
-            <form method="POST" action="checkout.php" class="checkout-form">
+            <form method="POST" action="pemesanan.php" class="checkout-form">
                 <div class="form-group">
                     <label for="name">Username</label>
                     <input type="text" id="name" name="name" required value="<?php echo htmlspecialchars($user['Username'] ?? ''); ?>" />
@@ -124,6 +105,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="form-group">
                     <label for="no_telp">No.Telp</label>
                     <input type="numeric" id="no_telp" name="no_telp" required value="<?php echo htmlspecialchars($user['no_telp'] ?? ''); ?>" />
+                </div>
+                <div class="form-group">
+                    <label for="jam_ambil">jam ambil</label>
+                    <input type="time" id="jam_ambil" name="jam_ambil" required value="<?php echo htmlspecialchars($user['jam_ambil'] ?? ''); ?>" />
+                </div>
+                <div class="form-group">
+                    <label for="catatan">catatan</label>
+                    <input type="text" id="catatan" name="catatan" required value="<?php echo htmlspecialchars($user['catatan'] ?? ''); ?>" />
                 </div>
 
                 <div class="cart-summary">
@@ -141,14 +130,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </thead>
                             <tbody>
                                 <?php foreach ($_SESSION['cart']['makanan'] as $item):
-                                    $subtotal = $item['Harga_makanan'] * $item['quantity'];
-                                    $total_makanan += $subtotal;
+                                    $sub_total = $item['Harga_makanan'] * $item['quantity'];
+                                    $total_makanan += $sub_total;
                                 ?>
                                 <tr>
                                     <td><?php echo htmlspecialchars($item['Nama_makanan']); ?></td>
                                     <td><?php echo format_rupiah($item['Harga_makanan']); ?></td>
                                     <td><?php echo $item['quantity']; ?></td>
-                                    <td><?php echo format_rupiah($subtotal); ?></td>
+                                    <td><?php echo format_rupiah($sub_total); ?></td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -164,44 +153,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
                 </div>
 
-                <button type="submit" class="place-order-btn">Pesan Sekarang</button>
+               <button type="submit" name="submit">Pesan Sekarang</button>
             </form>
         <?php endif; ?>
         <a href="keranjang.php" class="back-to-home">Kembali ke keranjang</a>
     </div>
 </body>
 </html>
-
-<?php
-if (isset($_POST['submit'])) {
-    // Ambil data dari form
-    $username = $_POST['Username'];
-    $email = $_POST['email_login'];
-    $no_telp = $_POST['no_telp_pengguna'];
-    $jam_ambil = $_POST['jam_ambil'];
-    $catatan = $_POST['catatan'];
-    $alamat = $_POST['alamat_makanan'];
-
-    // Ambil data dari session struk
-    $data = $_SESSION['struk'];
-    $user_id = $_SESSION['Username']['id_login'] ?? null;
-    $id_chart = $data['id_chart'];
-    $total_kuantitas = $data['total_kuantitas'];
-    $subtotal = $data['subtotal'];
-
-    $stmt = $mysqli->prepare("INSERT INTO pemesanan (id_login, id_chart, Username, email_login, no_telp, jam_ambil, catatan, total_kuantitas_makanan, subtotal_makanan, alamat_makanan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("iissssssds", $user_id, $id_chart, $username, $email, $no_telp, $jam_ambil, $catatan, $total_kuantitas, $subtotal, $alamat);
-
-    if ($stmt->execute()) {
-        $id_pemesanan = $stmt->insert_id;
-        $stmt->close();
-
-        // ✅ Redirect langsung ke struk.php
-        header("Location: struk.php?id=$id_pemesanan");
-        exit;
-    } else {
-        echo "Gagal menyimpan pemesanan: " . $stmt->error;
-    }
-}
-?>
 
