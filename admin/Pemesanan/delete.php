@@ -1,13 +1,23 @@
 <?php
+
 include_once("../koneksi.php");
 
-if(!isset($_GET['ID'])){
-    header('Location: index,php');
+if (!isset($_GET['id'])) {
+    header('Location: index.php');
+    exit();
 }
 
-$id = $_GET ['id'];
+$id = intval($_GET['id']); 
 
-$result = mysqli_query($mysqli, "DELETE FROM pemesanan WHERE id_pemesanan=$id");
+mysqli_query($mysqli, "DELETE FROM detail_pemesanan WHERE id_pemesanan = $id");
+mysqli_query($mysqli, "DELETE FROM rating WHERE id_pemesanan = $id");
 
-header("location:index.php");
+$deletepesan = mysqli_query($mysqli, "DELETE FROM pemesanan WHERE id_pemesanan = $id");
+
+if ($deletepesan) {
+    header("Location: index.php");
+    exit();
+} else {
+    echo "Terjadi kesalahan saat menghapus pemesanan.";
+}
 ?>

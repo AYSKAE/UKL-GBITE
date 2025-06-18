@@ -315,3 +315,77 @@ tbody tr:last-child td {
     animation: fadeInUp 0.6s ease-out 0.5s;
     animation-fill-mode: backwards;
 }
+
+button[type="submit"] {
+    display: inline-block;
+    width: 100%;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1F4529, #47663B);
+    color: #E8ECD7;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(31, 69, 41, 0.4);
+    background: linear-gradient(135deg, #2a5a37, #5a7d4d);
+}
+
+button[type="submit"]:active {
+    transform: translateY(-1px);
+}
+
+button[type="submit"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(71, 102, 59, 0.3);
+}
+
+/* Loading state untuk tombol */
+button[type="submit"]:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Hover effect dengan shimmer */
+button[type="submit"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+}
+
+button[type="submit"]:hover::before {
+    left: 100%;
+}
+
+/* Responsive design untuk tombol */
+@media (max-width: 768px) {
+    button[type="submit"] {
+        padding: 0.9rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    button[type="submit"] {
+        padding: 0.8rem 1.2rem;
+        font-size: 0.95rem;
+    }
+}

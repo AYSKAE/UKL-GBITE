@@ -97,7 +97,6 @@ $query = mysqli_query($mysqli, "SELECT * FROM chart
                 <table class="admin-table">
                     <thead>
                         <tr>
-                            <th>Gambar</th>
                             <th>Nama Barang</th>
                             <th>Harga</th>
                             <th>Jumlah</th>
@@ -112,7 +111,6 @@ $query = mysqli_query($mysqli, "SELECT * FROM chart
                             $subtotal = $item['Harga_makanan'] * $item['quantity'];
                             $total_barang += $subtotal;
                             echo '<tr>';
-                            echo '<td><img src="/UKL_GBITE/admin/gambar/' . htmlspecialchars($item['foto']) . '" alt="' . htmlspecialchars($item['Nama_makanan']) . '" style="max-width: 100px;"></td>';
                             echo '<td>' . htmlspecialchars($item['Nama_makanan']) . '</td>';
                             echo '<td>Rp ' . number_format($item['Harga_makanan'], 0, ",", ".") . '</td>';
                             echo '<td>';
@@ -142,7 +140,6 @@ $query = mysqli_query($mysqli, "SELECT * FROM chart
             <a href="/UKL_GBITE/user/landing/index.php" class="buy-button">Kembali</a>
             <br><br>      
         <?php endif; ?>
-        <a href="pesanan.php" class="buy-button">Pesanan Anda</a>
     </div>
 </body>
 </html>

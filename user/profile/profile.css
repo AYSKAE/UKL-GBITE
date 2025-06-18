@@ -7,15 +7,15 @@
 }
 
 body {
-    background-color: #f4fef4;
-    color: #2e3d27;
+    background-color: #E8ECD7;
+    color: #1F4529;
 }
 
 /* Header */
 header {
-    background-color: #2d6a4f;
+    background-color: #1F4529;
     padding: 20px 0;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(31, 69, 41, 0.2);
 }
 
 .navbar {
@@ -27,17 +27,17 @@ header {
 }
 
 .logo h2 {
-    color: #fff;
+    color: #E8ECD7;
     font-family: "Signika", sans-serif;
     font-size: 24px;
 }
 
 .logo span {
-    color: #b7e4c7;
+    color: #EED3B1;
 }
 
 .navigator a {
-    color: #fff;
+    color: #E8ECD7;
     text-decoration: none;
     margin-left: 20px;
     font-weight: 500;
@@ -45,7 +45,7 @@ header {
 }
 
 .navigator a:hover {
-    color: #95d5b2;
+    color: #EED3B1;
 }
 
 /* Profile Section */
@@ -54,16 +54,18 @@ header {
     max-width: 800px;
     margin: 50px auto;
     padding: 30px;
-    background-color: #ffffff;
+    background-color: #E8ECD7;
     border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 20px rgba(31, 69, 41, 0.1);
+    border: 2px solid #EED3B1;
 }
 
 .heading {
     text-align: center;
-    color: #40916c;
+    color: #1F4529;
     font-size: 32px;
     margin-bottom: 20px;
+    font-weight: 600;
 }
 
 /* Table Styling */
@@ -71,41 +73,105 @@ header {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
-    border: 1px solid #d8f3dc;
+    border: 2px solid #47663B;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-.table th,
-.table td {
+.table th, .table td {
     padding: 12px 20px;
-    border: 1px solid #d8f3dc;
+    border: 1px solid #47663B;
     text-align: left;
 }
 
 .table th {
-    background-color: #95d5b2;
-    color: #1b4332;
+    background-color: #47663B;
+    color: #E8ECD7;
+    font-weight: 600;
 }
 
 .table td {
-    background-color: #f1faee;
+    background-color: #EED3B1;
+    color: #1F4529;
+}
+
+.table tr:nth-child(even) td {
+    background-color: #E8ECD7;
 }
 
 /* Buttons */
-.btn,
-.btn-edit {
+.btn, .btn-edit {
     display: inline-block;
     margin-top: 15px;
     padding: 10px 20px;
     font-weight: 500;
-    color: #fff;
-    background-color: #2d6a4f;
+    color: #E8ECD7;
+    background-color: #47663B;
     border: none;
     border-radius: 8px;
     text-decoration: none;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
-.btn:hover,
-.btn-edit:hover {
-    background-color: #1b4332;
+.btn:hover, .btn-edit:hover {
+    background-color: #1F4529;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(31, 69, 41, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .navigator a {
+        margin: 0 10px;
+    }
+    
+    .profile {
+        width: 95%;
+        padding: 20px;
+        margin: 30px auto;
+    }
+    
+    .heading {
+        font-size: 24px;
+    }
+    
+    .table th, .table td {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo h2 {
+        font-size: 20px;
+    }
+    
+    .navigator {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .profile {
+        padding: 15px;
+    }
+    
+    .heading {
+        font-size: 20px;
+    }
+    
+    .table {
+        font-size: 12px;
+    }
+    
+    .btn, .btn-edit {
+        width: 100%;
+        text-align: center;
+        margin: 10px 0;
+    }
 }

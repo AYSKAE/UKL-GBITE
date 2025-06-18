@@ -38,17 +38,50 @@ if (isset($_GET['id'])) {
     <h1 class="title"><?php echo $data['Nama_makanan']; ?></h1><br>
     <img src="/UKL_GBITE/admin/produk/gambar/<?php echo $data['foto']; ?>" alt="<?php echo $data['Nama_makanan']; ?>" width="300"><br><br>
     <div class="data-makanan">
+    <div class="container-rating">
+    <div class="feedback-rating"> 
+        <h2>Ulasan</h2>
+        <?php
+        $query_feedback = mysqli_query($mysqli, "
+            SELECT rating.bintang, rating.ulasan, login_gbite.Username 
+            FROM rating
+            INNER JOIN login_gbite ON rating.id_login = login_gbite.id_login
+            INNER JOIN pemesanan ON rating.id_pemesanan = pemesanan.id_pemesanan
+            INNER JOIN makanan ON rating.id_makanan = makanan.id_makanan 
+            WHERE rating.id_makanan = '$id'
+        ") or die(mysqli_error($mysqli));
+
+        if (mysqli_num_rows($query_feedback) > 0) {
+            while ($feedback = mysqli_fetch_array($query_feedback)) {
+                echo "<div class='feedback-item'>";
+                echo "<p><strong>Nama Pengguna: </strong>" . htmlspecialchars($feedback['Username']) . "</p>";
+                echo "<p><strong>Rating: </strong></p>";
+                echo "<div class='rating'>";
+                for ($i = 1; $i <= 5; $i++) {
+                    echo $i <= $feedback['bintang'] ? "★" : "☆";
+                }
+                echo "</div>";
+                echo "<p><strong>Feedback: </strong>" . htmlspecialchars($feedback['ulasan']) . "</p>";
+                echo "</div>";
+            }
+        } else {
+            echo "<p>Belum ada feedback dan rating untuk kuliner ini.</p>";
+        }
+        ?>
+    </div>
+</div> 
     <table>    
-    <tr><th><strong>Nama makanan : <?php echo $data['Nama_makanan']; ?></strong></th></tr>
-    <tr><th><strong>Deskripsi : <?php echo $data['deskripsi']; ?></strong></th></tr>
     <tr><th><strong>Harga : <?php echo $data['Harga_makanan']; ?></strong></th></tr>
     <tr><th><strong>Maps : <?php echo $data['Maps']; ?></strong></th></tr>
+    <tr><th><strong>Deskripsi : <?php echo $data['deskripsi']; ?></strong></th></tr>
     </table>
     </div>
-    <a href="/UKL_GBITE/User/landing/index.php"><button class="btn-pesan">Kembali</button></a>
+   <div class="button-container">
+    <a href="/UKL_GBITE/User/landing/index.php" class="btn-pesan">Kembali</a>
     <?php
-    echo '<a href="/UKL_GBITE/user/chart/keranjang.php?add_makanan=' . $data["id_makanan"] . '" class="buy-button">Beli</a>';
-    ?>
+    echo '<a href="/UKL_GBITE/user/chart/keranjang.php?add_makanan=' . $data["id_makanan"] . '" class="buy-button">Add to cart</a>';
+    ?> </div>
+</div>
 
 </div>
 
@@ -61,36 +94,8 @@ if (isset($_GET['id'])) {
 }
 ?>
 
-<div class="container-rating">
-<div class="feedback-rating">
-        <h2>Ulasan</h2>
-        <?php
-            $query_feedback = mysqli_query($mysqli, "SELECT rating.bintang, rating.ulasan, login_gbite.Username FROM rating
-            INNER JOIN pemesanan ON pemesanan.id_pemesanan = pemesanan.id_pemesanan
-            INNER JOIN login_gbite ON pemesanan.id_login = login_gbite.id_login WHERE pemesanan.id_makanan='$id'") or die(mysqli_error($mysqli));
-            if (mysqli_num_rows($query_feedback) > 0) {
-                while ($feedback = mysqli_fetch_array($query_feedback)) {
-                    echo "<div class='feedback-item'>";
-                    echo "<p><strong>Nama Pengguna: </strong>" . $feedback['Username'] . "</p>";
-                    echo "<p><strong>Rating: </strong></p>";
-                    echo "<div class='rating'>";
-                    for ($i = 1; $i <= 5; $i++) {
-                        if ($i <= $feedback['rating']) {
-                            echo "★";
-                        } else {
-                            echo "☆";
-                        }
-                    }
-                     echo "</div>";
-                    echo "<p><strong>Feedback: </strong>" . $feedback['ulasan'] . "</p>";
-                    echo "</div>";
-                }
-            } else {
-                echo "<p>Belum ada feedback dan rating untuk kuliner ini.</p>";
-            }
-        ?>
-    </div>
-</div>
+
+
 <footer>
   <div class="footer">
     <p>&copy; 2025 GBITE. All rights reserved.</p>

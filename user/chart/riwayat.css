@@ -1,0 +1,461 @@
+/* G-BITE Order History Styles - Desktop Version */
+/* Color Palette: #1F4529, #47663B, #E8ECD7, #EED3B1 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #E8ECD7 0%, #EED3B1 100%);
+    min-height: 100vh;
+    color: #1F4529;
+    line-height: 1.6;
+}
+
+/* Header Styles */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 5%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(31, 69, 41, 0.1);
+    border-bottom: 2px solid rgba(71, 102, 59, 0.1);
+    transition: all 0.3s ease;
+}
+
+.logo {
+    font-family: 'Paytone One', cursive;
+    font-size: 2.5rem;
+    color: #1F4529;
+    text-decoration: none;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(31, 69, 41, 0.1);
+    transition: all 0.3s ease;
+}
+
+.logo:hover {
+    color: #47663B;
+    transform: scale(1.05);
+}
+
+.navbar {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.navbar li a {
+    color: #1F4529;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 10px 25px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    text-transform: capitalize;
+    position: relative;
+    overflow: hidden;
+}
+
+.navbar li a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1F4529, #47663B);
+    transition: all 0.3s ease;
+    z-index: -1;
+}
+
+.navbar li a:hover::before {
+    left: 0;
+}
+
+.navbar li a:hover {
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(31, 69, 41, 0.3);
+}
+
+#menu-icon {
+    font-size: 2rem;
+    color: #1F4529;
+    cursor: pointer;
+    display: none;
+}
+
+/* Main Content */
+.transaction-history {
+    max-width: 1200px;
+    margin: 120px auto 0;
+    padding: 40px 20px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.transaction-history h2 {
+    font-family: 'Paytone One', cursive;
+    font-size: 3rem;
+    text-align: center;
+    color: #1F4529;
+    margin-bottom: 50px;
+    position: relative;
+    text-shadow: 2px 2px 4px rgba(31, 69, 41, 0.1);
+}
+
+.transaction-history h2::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #1F4529, #47663B);
+    border-radius: 2px;
+}
+
+.transaction-history h2::before {
+    content: '🍽️';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    opacity: 0.7;
+}
+
+/* Order Cards */
+.pemesanan {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 30px rgba(31, 69, 41, 0.1);
+    border: 1px solid rgba(232, 236, 215, 0.5);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    animation: slideInFromLeft 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+.pemesanan:nth-child(even) {
+    animation: slideInFromRight 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.pemesanan::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #1F4529, #47663B, #1F4529);
+}
+
+.pemesanan:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(31, 69, 41, 0.15);
+    border-color: #47663B;
+}
+
+.pemesanan h3 {
+    font-family: 'Paytone One', cursive;
+    font-size: 1.8rem;
+    color: #1F4529;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(31, 69, 41, 0.1);
+    position: relative;
+}
+
+.pemesanan h3::after {
+    content: '🍴';
+    margin-left: 10px;
+    opacity: 0.7;
+}
+
+.pemesanan p {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    color: #47663B;
+    font-weight: 400;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(232, 236, 215, 0.3);
+}
+
+.pemesanan p:last-of-type {
+    border-bottom: none;
+    margin-bottom: 20px;
+}
+
+.pemesanan p span {
+    color: #1F4529;
+    font-weight: 600;
+    background: rgba(232, 236, 215, 0.5);
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 1rem;
+}
+
+/* Button Styles */
+.struk-btn {
+    background: linear-gradient(135deg, #1F4529, #47663B);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(31, 69, 41, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.struk-btn::before {
+    content: '📄';
+    margin-right: 8px;
+}
+
+.struk-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #47663B, #1F4529);
+    transition: all 0.3s ease;
+    z-index: -1;
+}
+
+.struk-btn:hover::after {
+    left: 0;
+}
+
+.struk-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(31, 69, 41, 0.4);
+}
+
+.struk-btn:active {
+    transform: translateY(-1px);
+}
+
+/* No Orders Message */
+.transaction-history > p {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #47663B;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(31, 69, 41, 0.1);
+    border: 2px dashed #E8ECD7;
+    margin-top: 50px;
+}
+
+.transaction-history > p::before {
+    content: '🍽️';
+    display: block;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+/* Footer */
+.footer {
+    background: linear-gradient(135deg, #1F4529, #47663B);
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 50px;
+    position: relative;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 20px solid #1F4529;
+}
+
+.footer a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.footer a::before {
+    content: '✉️';
+    margin-right: 10px;
+}
+
+.footer a:hover {
+    color: #EED3B1;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .transaction-history {
+        max-width: 90%;
+        padding: 30px 15px;
+    }
+    
+    .transaction-history h2 {
+        font-size: 2.5rem;
+    }
+    
+    .pemesanan {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    #menu-icon {
+        display: block;
+    }
+    
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: 0 4px 20px rgba(31, 69, 41, 0.1);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .navbar.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .logo {
+        font-size: 2rem;
+    }
+    
+    .transaction-history {
+        margin-top: 100px;
+        padding: 20px 10px;
+    }
+    
+    .transaction-history h2 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+    
+    .pemesanan {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .pemesanan h3 {
+        font-size: 1.5rem;
+    }
+    
+    .pemesanan p {
+        font-size: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .struk-btn {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+}
+
+/* Scroll animations */
+.pemesanan {
+    animation-delay: calc(var(--order) * 0.1s);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #E8ECD7;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #1F4529, #47663B);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #47663B, #1F4529);
+}

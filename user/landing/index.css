@@ -267,31 +267,27 @@
 
 /* Box utama untuk setiap produk */
 .box {
-    background: linear-gradient(135deg, #f5e6d3, #e8d5c4);
+    background: #f5e6d3;
     border-radius: 8px;
-    padding: 15px 15px 20px 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: visible;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
     display: flex;
     flex-direction: column;
     min-height: 300px;
 }
 
 .box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Container gambar */
 .thum {
-    position: relative;
     border-radius: 8px;
     overflow: hidden;
     margin-bottom: 15px;
     height: 160px;
-    flex-shrink: 0;
 }
 
 .thum img {
@@ -299,11 +295,6 @@
     height: 100%;
     object-fit: cover;
     border-radius: 8px;
-    transition: transform 0.3s ease;
-}
-
-.box:hover .thum img {
-    transform: scale(1.05);
 }
 
 /* Content area */
@@ -329,9 +320,6 @@
     align-items: center;
     gap: 5px;
     margin-bottom: 10px;
-}
-
-.rating {
     font-size: 16px;
     color: #f39c12;
 }
@@ -344,45 +332,36 @@
 
 /* Button styling */
 .btn-pesan {
-    background: linear-gradient(135deg, #2d5016, #3e6b1f);
+    background: #2d5016;
     color: white;
     border: none;
-    padding: 8px 16px;
+    padding: 10px 16px;
     border-radius: 8px;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color 0.2s ease;
     width: 100%;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    box-shadow: 0 3px 8px rgba(45, 80, 22, 0.3);
     margin-top: 5px;
 }
 
 .btn-pesan:hover {
-    background: linear-gradient(135deg, #3e6b1f, #2d5016);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(45, 80, 22, 0.4);
-}
-
-.btn-pesan:active {
-    transform: translateY(0);
+    background: #3e6b1f;
 }
 
 /* Header styling */
 h1 {
     text-align: center;
-    background: linear-gradient(135deg, #f5e6d3, #e8d5c4);
+    background: #f5e6d3;
     padding: 20px 0;
     margin: 0 0 40px 0;
     font-size: 3em;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 3px;
-    border-radius: 0;
 }
-
 
 /* Responsive design */
 @media (max-width: 1024px) {
@@ -403,7 +382,7 @@ h1 {
     }
     
     .thum {
-        min-height: 120px;
+        height: 120px;
     }
     
     .location h4 {
@@ -428,285 +407,11 @@ h1 {
     }
     
     .thum {
-        min-height: 140px;
+        height: 140px;
     }
 }
 
-/* Optional: Add some decorative elements */
-.box::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transform: rotate(45deg);
-    transition: all 0.5s ease;
-    opacity: 0;
-}
 
-.box:hover::before {
-    animation: shine 0.8s ease-in-out;
-}
-
-@keyframes shine {
-    0% { opacity: 0; top: -50%; right: -50%; }
-    50% { opacity: 1; }
-    100% { opacity: 0; top: 50%; right: 50%; }
-}
-/* Footer Styling 
-.main-footer {
-    background: linear-gradient(135deg, #2d5016, #1a3009);
-    color: #ffffff;
-    padding: 50px 0 0 0;
-    margin-top: 60px;
-    position: relative;
-}
-
-.main-footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #f5e6d3, #e8d5c4, #d35400);
-}
-
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: grid;
-    grid-template-columns: 2fr 1fr 1.5fr;
-    gap: 40px;
-    align-items: start;
-}
-
-/* About Section 
-.footer-about h3 {
-    font-size: 2.5em;
-    font-weight: 800;
-    color: #f5e6d3;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.footer-about p {
-    font-size: 16px;
-    line-height: 1.8;
-    color: #e8f5e8;
-    text-align: justify;
-    margin-bottom: 0;
-}
-
-/* Links Section 
-.footer-links h4 {
-    font-size: 1.4em;
-    font-weight: 600;
-    color: #f5e6d3;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    position: relative;
-}
-
-.footer-links h4::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 40px;
-    height: 3px;
-    background: #d35400;
-    border-radius: 2px;
-}
-
-.footer-links ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.footer-links a {
-    color: #e8f5e8;
-    text-decoration: none;
-    font-size: 16px;
-    text-transform: capitalize;
-    transition: all 0.3s ease;
-    padding: 8px 0;
-    border-left: 3px solid transparent;
-    padding-left: 12px;
-    margin-left: -12px;
-}
-
-.footer-links a:hover {
-    color: #f5e6d3;
-    border-left-color: #d35400;
-    padding-left: 20px;
-    font-weight: 500;
-}
-
-/* Contact Section 
-.footer-contact h4 {
-    font-size: 1.4em;
-    font-weight: 600;
-    color: #f5e6d3;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    position: relative;
-}
-
-.footer-contact h4::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 40px;
-    height: 3px;
-    background: #d35400;
-    border-radius: 2px;
-}
-
-.footer-contact p {
-    color: #e8f5e8;
-    font-size: 15px;
-    line-height: 1.6;
-    margin-bottom: 15px;
-}
-
-.footer-contact a {
-    color: #f5e6d3;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    border-bottom: 1px solid transparent;
-}
-
-.footer-contact a:hover {
-    color: #d35400;
-    border-bottom-color: #d35400;
-}
-
-/* Footer Bottom 
-.footer-bottom {
-    background: #1a3009;
-    text-align: center;
-    padding: 25px 0;
-    margin-top: 40px;
-    border-top: 1px solid rgba(245, 230, 211, 0.2);
-}
-
-.footer-bottom p {
-    margin: 0;
-    color: #b8d4b8;
-    font-size: 14px;
-    font-weight: 400;
-}
-
-/* Responsive Design 
-@media (max-width: 968px) {
-    .footer-container {
-        grid-template-columns: 1fr 1fr;
-        gap: 30px;
-    }
-    
-    .footer-about {
-        grid-column: 1 / -1;
-    }
-    
-    .footer-about h3 {
-        font-size: 2.2em;
-        text-align: center;
-    }
-    
-    .footer-about p {
-        text-align: center;
-    }
-}
-
-@media (max-width: 768px) {}
-    .main-footer {
-        padding: 40px 0 0 0;
-        margin-top: 40px;
-    }
-    
-    .footer-container {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        padding: 0 15px;
-    }
-    
-    .footer-about h3 {
-        font-size: 2em;
-        text-align: center;
-    }
-    
-    .footer-about p {
-        text-align: center;
-        font-size: 15px;
-    }
-    
-    .footer-links h4,
-    .footer-contact h4 {
-        font-size: 1.2em;
-        text-align: center;
-    }
-    
-    .footer-links h4::after,
-    .footer-contact h4::after {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    
-    .footer-links ul {
-        align-items: center;
-    }
-    
-    .footer-contact {
-        text-align: center;
-    }
-    
-    .footer-bottom {
-    background: #1a3009;
-    text-align: center;
-    padding: 25px 0;
-    margin-top: 40px;
-    border-top: 1px solid rgba(245, 230, 211, 0.2);
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    position: relative;
-    }
-
-    .footer-bottom p {
-    margin: 0;
-    color: #b8d4b8;
-    font-size: 14px;
-    font-weight: 400;
-}
-
-@media (max-width: 480px) {
-    .footer-about h3 {
-        font-size: 1.8em;
-    }
-    
-    .footer-about p {
-        font-size: 14px;
-    }
-    
-    .footer-links a,
-    .footer-contact p {
-        font-size: 14px;
-    }
-  }*/
-  /* Footer Styles */
 .main-footer {
   background: linear-gradient(135deg, #2d5016 0%, #4a7c59 100%);
   color: #ffffff;

@@ -12,6 +12,14 @@ if ($login) {
     if ($cek > 0) {
         $data = mysqli_fetch_assoc($login);
 
+        $_SESSION['user'] = [
+        'id_login'     => $data['id_login'],
+        'Username'     => $data['Username'],
+        'email_login'  => $data['email_login'],
+        'no_telp'      => $data['no_telp']
+    ];
+    $_SESSION['status'] = $data['status'];
+
         if ($data['status'] == "admin") {
             $_SESSION['Username'] = $username;
             $_SESSION['status'] = "admin";
@@ -27,4 +35,5 @@ if ($login) {
 } else {
     echo "Error: " . mysqli_error($mysqli);
 }
+
 ?>

@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -103,8 +102,8 @@ header {
     font-weight: 600;
 }
 
-/* Buttons */
-.btn-pesan, .btn-adopt, .btn-cart {
+/* UNIFIED BUTTON STYLES - All buttons will look identical */
+.btn-pesan, .buy-button {
     padding: 12px 30px;
     margin: 0.5rem;
     border: none;
@@ -115,34 +114,17 @@ header {
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
-}
-
-.btn-pesan {
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: inline-block;
+    
+    /* Unified styling - all buttons will have same appearance */
     background: linear-gradient(45deg, #47663B, #1F4529);
     color: #E8ECD7;
+    box-shadow: 0 4px 15px rgba(71, 102, 59, 0.3);
 }
 
-.btn-cart {
-    background: linear-gradient(45deg, #EED3B1, #E8ECD7);
-    color: #1F4529;
-    border: 2px solid #47663B;
-}
-
-.btn-pesan:hover, .btn-cart:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(71, 102, 59, 0.4);
-}
-
-.btn-adopt {
-    background: linear-gradient(45deg, #1F4529, #47663B);
-    color: #EED3B1;
-}
-
-.btn-adopt:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(31, 69, 41, 0.5);
-    animation: pulse 1.5s infinite;
-}
 
 /* Rating Container */
 .container-rating {
@@ -188,7 +170,7 @@ header {
 /* Rating Stars */
 .rating {
     font-size: 1.5rem;
-    color: #EED3B1;
+    color: #FFD700;
     margin: 0.5rem 0;
     filter: drop-shadow(1px 1px 2px rgba(31, 69, 41, 0.3));
 }
@@ -228,6 +210,48 @@ footer {
     }
     100% {
         box-shadow: 0 0 0 0 rgba(31, 69, 41, 0);
+    }
+}
+
+@keyframes cartBounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(-3px) scale(1.05);
+    }
+    40% {
+        transform: translateY(-5px) scale(1.08);
+    }
+    60% {
+        transform: translateY(-2px) scale(1.03);
+    }
+}
+
+@keyframes cartPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7);
+    }
+    100% {
+        box-shadow: 0 0 0 10px rgba(255, 107, 107, 0);
+    }
+}
+
+@keyframes buyBounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(-3px) scale(1.05);
+    }
+    40% {
+        transform: translateY(-5px) scale(1.08);
+    }
+    60% {
+        transform: translateY(-2px) scale(1.03);
+    }
+}
+
+@keyframes buyPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+    }
+    100% {
+        box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
     }
 }
 
@@ -277,7 +301,7 @@ footer {
         padding: 0.8rem;
     }
     
-    .btn-pesan, .btn-adopt, .btn-cart {
+    .btn-pesan, .btn-adopt, .btn-cart, .btn-add-to-cart, .buy-button {
         width: 100%;
         margin: 0.5rem 0;
     }

@@ -59,6 +59,8 @@
         <?php }
         ?>
         <br>
+         <a href="/UKL_GBITE/user/chart/riwayat.php" class="btn">Riwayat</a>
+        <br>
         <a href="logout.php" class="btn">Log Out</a>
     </section>
 

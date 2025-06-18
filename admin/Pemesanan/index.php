@@ -35,37 +35,34 @@
     </tr>
 
     <?php
-    include '../koneksi.php';
+include '../koneksi.php';
 
-    $query_mysql = mysqli_query($mysqli, "
-        SELECT 
-            pemesanan.id_pemesanan,
-            pemesanan.total_kuantitas_makanan, 
-            pemesanan.sub_total_makanan, 
-            pemesanan.jam_ambil
-        FROM pemesanan
-        INNER JOIN login_gbite ON pemesanan.id_login = login_gbite.id_login
-        INNER JOIN chart ON pemesanan.id_chart = chart.id_chart
-    ") or die(mysqli_error($mysqli));
+$query_mysql = mysqli_query($mysqli, "
+    SELECT 
+        pemesanan.id_pemesanan,
+        pemesanan.total_kuantitas_makanan, 
+        pemesanan.sub_total_makanan, 
+        pemesanan.jam_ambil
+    FROM pemesanan
+    LEFT JOIN login_gbite ON pemesanan.id_login = login_gbite.id_login
+    LEFT JOIN chart ON pemesanan.id_chart = chart.id_chart
+");
 
-    $nomor = 1;
-    while($data = mysqli_fetch_array($query_mysql)) {
-    ?>
-    <tr>
-        <td><?php echo $nomor++; ?></td>
-        <td><?php echo $data['total_kuantitas_makanan']; ?></td>
-        <td><?php echo $data['sub_total_makanan']; ?></td>
-        <td><?php echo $data['jam_ambil']; ?></td>
-        <td>
-            <a href="delete.php?id=<?php echo $data['id_pemesanan']; ?>" class="btn-delete" onClick="return confirm('Apakah anda yakin ingin menghapus data tersebut?')">Hapus</a>
-            <a href="edit.php?id=<?php echo $data['id_pemesanan']; ?>" class="btn-edit">Edit</a>
-        </td>
-    </tr>
-    <?php } ?>
-</table>
+if (!$query_mysql) {
+    die("Query error: " . mysqli_error($mysqli));
+}
 
-<br><br>
-<a href="../logout.php" class="btn">Log Out</a>
-
-</body>
-</html>
+$nomor = 1;
+while($data = mysqli_fetch_array($query_mysql)) {
+?>
+<tr>
+    <td><?= $nomor++ ?></td>
+    <td><?= htmlspecialchars($data['total_kuantitas_makanan']) ?></td>
+    <td><?= htmlspecialchars($data['sub_total_makanan']) ?></td>
+    <td><?= htmlspecialchars($data['jam_ambil']) ?></td>
+    <td>
+        <a href="delete.php?id=<?= $data['id_pemesanan'] ?>" class="btn-delete" onClick="return confirm('Apakah anda yakin ingin menghapus data tersebut?')">Hapus</a>
+        <a href="edit.php?id=<?= $data['id_pemesanan'] ?>" class="btn-edit">Edit</a>
+    </td>
+</tr>
+<?php } ?>

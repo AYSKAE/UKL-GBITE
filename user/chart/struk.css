@@ -1,0 +1,347 @@
+/* G-BITE Receipt Styles - Desktop Version */
+/* Color Palette: #1F4529, #47663B, #E8ECD7, #EED3B1 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #E8ECD7 0%, #EED3B1 100%);
+    min-height: 100vh;
+    padding: 40px 20px;
+    line-height: 1.6;
+    color: #1F4529;
+}
+
+.struk {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(31, 69, 41, 0.15);
+    overflow: hidden;
+    position: relative;
+    animation: slideUp 0.8s ease-out;
+}
+
+/* Top accent border */
+.struk::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #1F4529, #47663B, #1F4529);
+}
+
+/* Animation */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header styling */
+.struk h2 {
+    background: linear-gradient(135deg, #1F4529 0%, #47663B 100%);
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 30px;
+    font-size: 2.5em;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    letter-spacing: 3px;
+    position: relative;
+}
+
+.struk h2::after {
+    content: '🍽️';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.4em;
+    box-shadow: 0 2px 10px rgba(31, 69, 41, 0.3);
+}
+
+/* Content padding */
+.struk > *:not(h2) {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+/* Paragraph styling */
+.struk p {
+    font-size: 16px;
+    margin: 15px 0;
+    padding: 12px 20px;
+    background: rgba(232, 236, 215, 0.3);
+    border-radius: 8px;
+    border-left: 4px solid #47663B;
+    transition: all 0.3s ease;
+}
+
+.struk p:hover {
+    background: rgba(232, 236, 215, 0.5);
+    transform: translateX(5px);
+}
+
+.struk p strong {
+    color: #1F4529;
+    font-weight: 600;
+    min-width: 140px;
+    display: inline-block;
+}
+
+/* HR styling */
+hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #47663B, transparent);
+    margin: 30px 0;
+    position: relative;
+}
+
+hr::after {
+    content: '✦';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    color: #47663B;
+    padding: 0 15px;
+    font-size: 1.2em;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(31, 69, 41, 0.1);
+    background: white;
+}
+
+th {
+    background: linear-gradient(135deg, #1F4529, #47663B);
+    color: white;
+    padding: 18px 15px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+th:first-child {
+    border-top-left-radius: 12px;
+}
+
+th:last-child {
+    border-top-right-radius: 12px;
+}
+
+td {
+    padding: 16px 15px;
+    border-bottom: 1px solid rgba(232, 236, 215, 0.5);
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+tr:hover td {
+    background-color: rgba(232, 236, 215, 0.3);
+    transform: scale(1.01);
+}
+
+/* Total row styling */
+tr:last-child td {
+    background: linear-gradient(135deg, #EED3B1, rgba(238, 211, 177, 0.8));
+    font-weight: 700;
+    font-size: 18px;
+    color: #1F4529;
+    border-bottom: none;
+}
+
+tr:last-child:hover td {
+    background: linear-gradient(135deg, #EED3B1, rgba(238, 211, 177, 0.9));
+    transform: none;
+}
+
+/* Price styling */
+td:nth-child(2), td:nth-child(4) {
+    color: #1F4529;
+    font-weight: 600;
+}
+
+/* Review button styling */
+td a {
+    background: linear-gradient(135deg, #47663B, #1F4529);
+    color: white;
+    padding: 10px 18px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(31, 69, 41, 0.3);
+}
+
+td a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(31, 69, 41, 0.4);
+    background: linear-gradient(135deg, #1F4529, #47663B);
+}
+
+/* Thank you message */
+.struk p[style*="text-align:center"] {
+    background: rgba(238, 211, 177, 0.3);
+    border: 2px dashed #47663B;
+    border-radius: 12px;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1F4529;
+    margin: 30px 0;
+    text-align: center;
+    position: relative;
+}
+
+.struk p[style*="text-align:center"]:hover {
+    transform: none;
+}
+
+.struk p[style*="text-align:center"]::before {
+    content: '🎉';
+    margin-right: 10px;
+}
+
+.struk p[style*="text-align:center"]::after {
+    content: '🎉';
+    margin-left: 10px;
+}
+
+/* Back button container */
+div[style*="text-align:center"] {
+    text-align: center;
+    padding: 30px 40px 40px;
+    background: rgba(232, 236, 215, 0.2);
+}
+
+/* Back button styling */
+.buy-button {
+    background: linear-gradient(135deg, #1F4529, #47663B);
+    color: white;
+    padding: 15px 35px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 6px 20px rgba(31, 69, 41, 0.3);
+    border: 2px solid transparent;
+}
+
+.buy-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(31, 69, 41, 0.4);
+    background: linear-gradient(135deg, #47663B, #1F4529);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.buy-button:active {
+    transform: translateY(-2px);
+}
+
+/* Responsive adjustments for larger screens */
+@media (min-width: 1200px) {
+    .struk {
+        max-width: 900px;
+    }
+    
+    .struk h2 {
+        font-size: 3em;
+        padding: 40px;
+    }
+    
+    .struk > *:not(h2) {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+    
+    .struk p {
+        font-size: 18px;
+        padding: 15px 25px;
+    }
+    
+    th {
+        padding: 20px 18px;
+        font-size: 15px;
+    }
+    
+    td {
+        padding: 18px;
+        font-size: 16px;
+    }
+}
+
+/* Subtle animations */
+.struk p, table, hr {
+    animation: fadeIn 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+.struk p:nth-child(3) { animation-delay: 0.1s; }
+.struk p:nth-child(4) { animation-delay: 0.2s; }
+.struk p:nth-child(5) { animation-delay: 0.3s; }
+.struk p:nth-child(6) { animation-delay: 0.4s; }
+table { animation-delay: 0.5s; }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Print styles */
+@media print {
+    body {
+        background: none;
+        padding: 0;
+    }
+    
+    .struk {
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .buy-button {
+        display: none;
+    }
+}

@@ -1,5 +1,5 @@
 <?php
-include_once("../koneksi.php");
+include_once("../mysqli.php");
 
 if(!isset($_GET['ID'])){
     header('Location: index,php');
